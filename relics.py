@@ -1,10 +1,7 @@
 class Relics:
-    def __init__(self, *, name: str, count: int) -> None:
+    def __init__(self, *, name: str, count: int, **kwargs) -> None:
         self.name = name
         self.count = count
-        self.health_modifier = 0
-        self.damage_modifier = 0
-        self.defence_modifier = 0
 
     def __str__(self) -> str:
         return f'The item is {self.name}, count is {self.count}'
