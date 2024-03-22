@@ -12,9 +12,14 @@ class Relics:
 
 class HealthPotion(Relics):
     name = 'Potion'
+    # Heals 30 HP
+
+
+class StoneSkinPotion(Relics):
+    name = 'Stone Skin'
+    # Increases your defence by three times
 
 
 # class Diadem(Relics):
 #     name = 'Diadem'
-#
-#     def equip(self, *, target: 'Character') -> None:
+
