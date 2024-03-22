@@ -4,6 +4,7 @@ class Character:
         self.health = self.base_health * level
         self.attack_power = self.base_attack * level
         self.name = name
+        self.inventory = []
 
     def __str__(self) -> str:
         return f'The {self.name} character is level {self.level} with health {self.health} and attack {self.attack_power}'
@@ -13,6 +14,9 @@ class Character:
 
     def got_damage(self, *, damage: int) -> None:
         self.health -= damage
+
+    def add_to_inventory(self, *, item) -> None:
+        self.inventory.append(item)
 
 
 class Elf(Character):
