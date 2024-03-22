@@ -13,7 +13,7 @@ class HealthPotion(Relics):
         print(f'{target.name} health increased by 30 and is {target.health} now')
 
 
-class Diadem(Relics):
-    name = 'Diadem'
-
-    def equip(self, *, target: 'Character') -> None:
+# class Diadem(Relics):
+#     name = 'Diadem'
+#
+#     def equip(self, *, target: 'Character') -> None:
