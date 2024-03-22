@@ -1,5 +1,5 @@
 class Relics:
-    def __init__(self, *, name: str, count: int, **kwargs) -> None:
+    def __init__(self, *, name: str, count: int) -> None:
         self.name = name
         self.count = count
 
