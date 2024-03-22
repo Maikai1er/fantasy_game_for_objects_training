@@ -10,16 +10,17 @@ def fight(*, character_1: 'Character', character_2: 'Character') -> None:
         print(f'The {character_1.name} has {character_1.health} hp left')
         print(f'The {character_2.name} has {character_2.health} hp left')
         if character_1.health <= 20:
-            potion.use(target=character_1)
+            character_1.use_health_potion()
         if character_2.health <= 20:
-            potion.use(target=character_2)
-        time.sleep(1)
+            character_2.use_health_potion()
+        time.sleep(2)
 
 
 ork = Ork(name='Orche', level=1)
 elf = Elf(name='Legolas', level=1)
 potion = HealthPotion(name='Potion', count=2)
-
-
+print(ork.inventory)
+ork.add_to_inventory(item=potion)
+elf.add_to_inventory(item=potion)
 print(ork.inventory)
 fight(character_1=ork, character_2=elf)
