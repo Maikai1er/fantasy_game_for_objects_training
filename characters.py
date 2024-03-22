@@ -16,17 +16,19 @@ class Character:
     def attack_target(self, target: 'Character') -> None:
         target.got_damage(damage=self.attack_power)
 
-    def defence_percentage(self) -> int:
-        return self.defence / 100
-
     def got_damage(self, *, damage: int) -> None:
-        damage_received = damage * (1 - self.defence_percentage())
+        damage_received = damage * (1 - self.defence / 100)
         self.health -= round(damage_received)
 
     def add_to_inventory(self, *, item) -> None:
         item_to_add = Relics.create_item_and_count(item)
         self.inventory.update(item_to_add)
 
+    def equip(self, *, item) -> None:
+        self.defence += 2
+        self.health += 2
+        self.attack_power += 2
+        # Only the Diadem for now, will try to rework
     def use_health_potion(self) -> None:
         if self.inventory['Potion'] > 0:
             self.health += 20
@@ -39,7 +41,7 @@ class Character:
         if self.inventory['Stone Skin Potion'] > 0:
             self.defence *= 3
             self.inventory['Stone Skin Potion'] -= 1
-            print(f'{self.name} used Stone Skin Potion! Base defence is increased by 3 times!')
+            print(f'{self.name} used Stone Skin Potion! Defence is increased by 3 times!')
 
 
 class Elf(Character):
