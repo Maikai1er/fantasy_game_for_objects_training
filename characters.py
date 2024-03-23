@@ -40,6 +40,7 @@ class Character:
             self.increase_defence(defence_modifier=item.defence_modifier or 0)
         if hasattr(item, 'damage_modifier'):
             self.increase_attack(damage_modifier=item.damage_modifier or 0)
+        self.inventory[item.name] -= 1
 
     def use_potion(self, *, potion_name: str) -> None:
         if self.inventory[potion_name] > 0:
