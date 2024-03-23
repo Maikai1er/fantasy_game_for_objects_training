@@ -41,19 +41,21 @@ class Character:
         if hasattr(item, 'damage_modifier'):
             self.increase_attack(damage_modifier=item.damage_modifier or 0)
 
-    def use_health_potion(self) -> None:
-        if self.inventory['Potion'] > 0:
-            self.health += 20
-            self.inventory['Potion'] -= 1
-            print(
-                f'Health Potion is used! The {self.name} health is {self.health}! Potions left: {self.inventory["Potion"]}'
-            )
-
-    def use_stone_skin_potion(self) -> None:
-        if self.inventory['Stone Skin Potion'] > 0:
-            self.defence *= 3
-            self.inventory['Stone Skin Potion'] -= 1
-            print(f'{self.name} used Stone Skin Potion! Defence is increased by 3 times!')
+    def use_potion(self, *, potion_name: str) -> None:
+        if self.inventory[potion_name] > 0:
+            if potion_name == 'Health Potion':
+                self.health += 30
+                print(
+                    f'{self.name} used Health Potion! The {self.name} health is {self.health}!\n'
+                    f'{self.name} has {self.inventory[potion_name]} Health Potions left!'
+                )
+            if potion_name == 'Stone Skin':
+                self.defence *= 3
+                print(
+                    f'{self.name} used Stone Skin Potion! Defence is increased by 3 times!\n'
+                    f'{self.name} has {self.inventory[potion_name]} Stone Skin Potions left!'
+                )
+            self.inventory[potion_name] -= 1
 
 
 class Elf(Character):

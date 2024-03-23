@@ -10,13 +10,13 @@ def fight(*, character_1: 'Character', character_2: 'Character') -> None:
         print(f'The {character_1.name} has {character_1.health} hp left')
         print(f'The {character_2.name} has {character_2.health} hp left')
         if character_1.health <= 30:
-            character_1.use_health_potion()
+            character_1.use_potion(potion_name='Health Potion')
         if character_2.health <= 30:
-            character_2.use_health_potion()
+            character_2.use_potion(potion_name='Health Potion')
         if character_1.health <= 40:
-            character_1.use_stone_skin_potion()
+            character_1.use_potion(potion_name='Stone Skin Potion')
         if character_2.health <= 40:
-            character_2.use_stone_skin_potion()
+            character_2.use_potion(potion_name='Stone Skin Potion')
         time.sleep(2)
     if character_1.health <= 0 and character_2.health <= 0:
         print(f'The {character_1.name} and the {character_2.name} both dead. RIP!')
@@ -29,7 +29,7 @@ def fight(*, character_1: 'Character', character_2: 'Character') -> None:
 
 ork = Ork(name='Orche', level=1)
 elf = Elf(name='Legolas', level=1)
-potion = HealthPotion(name='Potion', count=2)
+potion = HealthPotion(name='Health Potion', count=2)
 potion_2 = StoneSkinPotion(name='Stone Skin Potion', count=1)
 diadem = Diadem(name='Diadem', count=1)
 sword = Sword(name='Sword', count=1)
