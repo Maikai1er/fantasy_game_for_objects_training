@@ -38,6 +38,13 @@ class Diadem(Relics):
     # Increases damage, hp and defence by 2
 
 
-diadem = Diadem(name='Diadem', count=1)
+class Sword(Relics):
+    name = 'Sword'
 
-print(diadem.damage_modifier)
+    def __init__(self, name: str, count: int) -> None:
+        super().__init__(name=name, count=count)
+        self.perks = {
+            'damage_modifier': 5,
+        }
+
+        self.damage_modifier = self.perks.get('damage_modifier')

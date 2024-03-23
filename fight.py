@@ -1,5 +1,5 @@
 from characters import Ork, Elf
-from relics import HealthPotion, StoneSkinPotion, Diadem
+from relics import HealthPotion, StoneSkinPotion, Diadem, Sword
 import time
 
 
@@ -32,7 +32,9 @@ elf = Elf(name='Legolas', level=1)
 potion = HealthPotion(name='Potion', count=2)
 potion_2 = StoneSkinPotion(name='Stone Skin Potion', count=1)
 diadem = Diadem(name='Diadem', count=1)
+sword = Sword(name='Sword', count=1)
 ork.add_to_inventory(item=potion)
+ork.add_to_inventory(item=sword)
 elf.add_to_inventory(item=potion)
 ork.add_to_inventory(item=potion_2)
 elf.add_to_inventory(item=potion_2)
@@ -40,5 +42,6 @@ ork.add_to_inventory(item=diadem)
 elf.add_to_inventory(item=diadem)
 print(ork.inventory)
 ork.equip(item=diadem)
+ork.equip(item=sword)
 elf.equip(item=diadem)
 fight(character_1=ork, character_2=elf)

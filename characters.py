@@ -24,11 +24,22 @@ class Character:
         item_to_add = Relics.create_item_and_count(item)
         self.inventory.update(item_to_add)
 
+    def increase_attack(self, *, damage_modifier=0) -> None:
+        self.attack_power += damage_modifier
+
+    def increase_defence(self, *, defence_modifier=0) -> None:
+        self.defence += defence_modifier
+
+    def increase_health(self, *, health_modifier=0) -> None:
+        self.health -= health_modifier
+
     def equip(self, *, item) -> None:
-        self.defence += item.defence_modifier
-        self.health += item.health_modifier
-        self.attack_power += item.damage_modifier
-        # Only the Diadem for now, will try to rework
+        if hasattr(item, 'health_modifier'):
+            self.increase_health(health_modifier=item.health_modifier or 0)
+        if hasattr(item, 'defence_modifier'):
+            self.increase_defence(defence_modifier=item.defence_modifier or 0)
+        if hasattr(item, 'damage_modifier'):
+            self.increase_attack(damage_modifier=item.damage_modifier or 0)
 
     def use_health_potion(self) -> None:
         if self.inventory['Potion'] > 0:
