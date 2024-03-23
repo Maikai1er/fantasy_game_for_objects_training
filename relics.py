@@ -22,8 +22,22 @@ class StoneSkinPotion(Relics):
 
 class Diadem(Relics):
     name = 'Diadem'
-    health_modifier = 2
-    damage_modifier = 2
-    defence_modifier = 2
+
+    def __init__(self, name: str, count: int) -> None:
+        super().__init__(name=name, count=count)
+        self.perks = {
+            'health_modifier': 2,
+            'damage_modifier': 3,
+            'defence_modifier': 2,
+        }
+
+        self.health_modifier = self.perks.get('health_modifier')
+        self.damage_modifier = self.perks.get('damage_modifier')
+        self.defence_modifier = self.perks.get('defence_modifier')
 
     # Increases damage, hp and defence by 2
+
+
+diadem = Diadem(name='Diadem', count=1)
+
+print(diadem.damage_modifier)

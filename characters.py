@@ -25,10 +25,11 @@ class Character:
         self.inventory.update(item_to_add)
 
     def equip(self, *, item) -> None:
-        self.defence += 2
-        self.health += 2
-        self.attack_power += 2
+        self.defence += item.defence_modifier
+        self.health += item.health_modifier
+        self.attack_power += item.damage_modifier
         # Only the Diadem for now, will try to rework
+
     def use_health_potion(self) -> None:
         if self.inventory['Potion'] > 0:
             self.health += 20
