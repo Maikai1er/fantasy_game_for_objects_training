@@ -1,5 +1,5 @@
 from characters import Creature, Ork, Elf
-from relics import HealthPotion, StoneSkinPotion, Diadem, Sword, Bow
+from relics import HealthPotion, StoneSkinPotion, Diadem, Sword, Bow, Armour
 import time
 
 
@@ -35,6 +35,7 @@ def prepare_to_fight():
     diadem = Diadem(name='Diadem', count=1)
     sword = Sword(name='Sword', count=1)
     bow = Bow(name='Bow', count=1)
+    armour = Armour(name='Armour', count=1)
     ork.add_to_inventory(item=potion)
     ork.add_to_inventory(item=sword)
     elf.add_to_inventory(item=potion)
@@ -43,10 +44,14 @@ def prepare_to_fight():
     ork.add_to_inventory(item=diadem)
     elf.add_to_inventory(item=diadem)
     elf.add_to_inventory(item=bow)
+    ork.add_to_inventory(item=armour)
+    elf.add_to_inventory(item=armour)
     ork.equip(item=diadem)
     ork.equip(item=sword)
     elf.equip(item=diadem)
     elf.equip(item=bow)
+    ork.equip(item=armour)
+    elf.equip(item=armour)
     return elf, ork
 
 

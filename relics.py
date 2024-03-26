@@ -57,3 +57,11 @@ class Bow(Relics):
         'damage_modifier': 7,
     }
     description = 'Increases damage by 7'
+
+
+class Armour(Relics):
+    name = 'Armour'
+    attributes = {
+        'defence_modifier': 10
+    }
+    description = 'Increases armour by 10'
