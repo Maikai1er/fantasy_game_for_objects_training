@@ -1,4 +1,4 @@
-from relics import Relics, HealthPotion
+from relics import Relics
 
 
 class Character:
@@ -44,19 +44,19 @@ class Character:
 
     def use_potion(self, *, potion_name: str) -> None:
         if self.inventory[potion_name] > 0:
+            self.inventory[potion_name] -= 1
             if potion_name == 'Health Potion':
                 self.health += 30
                 print(
                     f'{self.name} used Health Potion! The {self.name} health is {self.health}!\n'
                     f'{self.name} has {self.inventory[potion_name]} Health Potions left!'
                 )
-            if potion_name == 'Stone Skin':
+            if potion_name == 'Stone Skin Potion':
                 self.defence *= 3
                 print(
                     f'{self.name} used Stone Skin Potion! Defence is increased by 3 times!\n'
                     f'{self.name} has {self.inventory[potion_name]} Stone Skin Potions left!'
                 )
-            self.inventory[potion_name] -= 1
 
 
 class Elf(Character):

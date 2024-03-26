@@ -11,12 +11,12 @@ class Relics:
 
 
 class HealthPotion(Relics):
-    name = 'Potion'
+    name = 'Health Potion'
     # Heals 30 HP
 
 
 class StoneSkinPotion(Relics):
-    name = 'Stone Skin'
+    name = 'Stone Skin Potion'
     # Increases your current defence by three times
 
 
