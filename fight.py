@@ -1,5 +1,5 @@
 from characters import Creature, Ork, Elf
-from relics import HealthPotion, StoneSkinPotion, Diadem, Sword
+from relics import HealthPotion, StoneSkinPotion, Diadem, Sword, Bow
 import time
 
 
@@ -17,7 +17,7 @@ def fight(*, character_1: 'Creature', character_2: 'Creature') -> None:
             character_1.use_potion(potion_name='Stone Skin Potion')
         if character_2.health <= 40:
             character_2.use_potion(potion_name='Stone Skin Potion')
-        time.sleep(2)
+        time.sleep(0)
     if character_1.health <= 0 and character_2.health <= 0:
         print(f'The {character_1.name} and the {character_2.name} both dead. RIP!')
         return
@@ -34,6 +34,7 @@ def prepare_to_fight():
     potion_2 = StoneSkinPotion(name='Stone Skin Potion', count=1)
     diadem = Diadem(name='Diadem', count=1)
     sword = Sword(name='Sword', count=1)
+    bow = Bow(name='Bow', count=1)
     ork.add_to_inventory(item=potion)
     ork.add_to_inventory(item=sword)
     elf.add_to_inventory(item=potion)
@@ -41,10 +42,11 @@ def prepare_to_fight():
     elf.add_to_inventory(item=potion_2)
     ork.add_to_inventory(item=diadem)
     elf.add_to_inventory(item=diadem)
+    elf.add_to_inventory(item=bow)
     ork.equip(item=diadem)
     ork.equip(item=sword)
-    print(ork.inventory)
     elf.equip(item=diadem)
+    elf.equip(item=bow)
     return elf, ork
 
 

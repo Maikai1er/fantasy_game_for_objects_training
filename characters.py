@@ -51,7 +51,7 @@ class Character(Creature):
     kind = 'Character'
 
     def add_to_inventory(self, *, item) -> None:
-        item_to_add = Relics.create_item_and_count(item)
+        item_to_add = item.create_item_and_count()
         self.inventory.update(item_to_add)
 
     def equip(self, *, item) -> None:
