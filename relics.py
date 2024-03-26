@@ -1,7 +1,12 @@
 class Relics:
-    def __init__(self, *, name: str, count: int) -> None:
+    def __init__(self, name: str, count: int, attributes: dict = {}, description: str = '') -> None:
         self.name = name
         self.count = count
+        self.attributes = attributes
+        self.health_modifier = self.attributes.get('health_modifier')
+        self.damage_modifier = self.attributes.get('damage_modifier')
+        self.defence_modifier = self.attributes.get('defence_modifier')
+        self.description = description
 
     def __str__(self) -> str:
         return f'The item is {self.name}, count is {self.count}'
@@ -12,39 +17,29 @@ class Relics:
 
 class HealthPotion(Relics):
     name = 'Health Potion'
-    # Heals 30 HP
+    attributes = []
+    description = 'Heals the owner for 30 HP'
 
 
 class StoneSkinPotion(Relics):
     name = 'Stone Skin Potion'
-    # Increases your current defence by three times
+    attributes = []
+    description = 'Increases defence by 3 times'
 
 
 class Diadem(Relics):
     name = 'Diadem'
-
-    def __init__(self, name: str, count: int) -> None:
-        super().__init__(name=name, count=count)
-        self.perks = {
-            'health_modifier': 2,
-            'damage_modifier': 3,
-            'defence_modifier': 2,
-        }
-
-        self.health_modifier = self.perks.get('health_modifier')
-        self.damage_modifier = self.perks.get('damage_modifier')
-        self.defence_modifier = self.perks.get('defence_modifier')
-
-    # Increases damage, hp and defence by 2
+    attributes = {
+        'health_modifier': 2,
+        'damage_modifier': 3,
+        'defence_modifier': 2,
+    }
+    description = 'Increases damage, hp and defence by 2'
 
 
 class Sword(Relics):
     name = 'Sword'
-
-    def __init__(self, name: str, count: int) -> None:
-        super().__init__(name=name, count=count)
-        self.perks = {
-            'damage_modifier': 5,
-        }
-
-        self.damage_modifier = self.perks.get('damage_modifier')
+    perks = {
+        'damage_modifier': 5,
+    }
+    description = 'Increases damage by 5'
