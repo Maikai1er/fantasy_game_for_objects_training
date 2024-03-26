@@ -1,9 +1,9 @@
-from characters import Ork, Elf
+from characters import Creature, Ork, Elf
 from relics import HealthPotion, StoneSkinPotion, Diadem, Sword
 import time
 
 
-def fight(*, character_1: 'Character', character_2: 'Character') -> None:
+def fight(*, character_1: 'Creature', character_2: 'Creature') -> None:
     while character_1.health > 0 and character_2.health > 0:
         character_1.attack_target(character_2)
         character_2.attack_target(character_1)
@@ -28,8 +28,8 @@ def fight(*, character_1: 'Character', character_2: 'Character') -> None:
 
 
 def prepare_to_fight():
-    ork = Ork(name='Orche', level=1)
-    elf = Elf(name='Legolas', level=1)
+    ork = Ork(name='Orche', level=1, kind='Character')
+    elf = Elf(name='Legolas', level=1, kind='Character')
     potion = HealthPotion(name='Health Potion', count=2)
     potion_2 = StoneSkinPotion(name='Stone Skin Potion', count=1)
     diadem = Diadem(name='Diadem', count=1)
