@@ -11,9 +11,6 @@ class Relics:
     def __str__(self) -> str:
         return f'The item is {self.name}, count is {self.count}'
 
-    def create_item_and_count(self) -> object:
-        return {self.name: self.count}
-
     def get_attributes(self) -> dict:
         return getattr(self.__class__, 'attributes', {})
 
@@ -23,13 +20,17 @@ class Relics:
 
 class HealthPotion(Relics):
     name = 'Health Potion'
-    attributes = {}
+    attributes = {
+        'heal_amount': 30,
+    }
     description = 'Heals the owner for 30 HP'
 
 
 class StoneSkinPotion(Relics):
     name = 'Stone Skin Potion'
-    attributes = {}
+    attributes = {
+        'defence_multiplier': 3
+    }
     description = 'Increases defence by 3 times'
 
 

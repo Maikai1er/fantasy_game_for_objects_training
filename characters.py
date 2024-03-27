@@ -5,14 +5,16 @@ class Creature:
     def __init__(self, *, name: str, level: int, kind: str) -> None:
         self.name = name
         self.level = level
-        self.health = self.base_health * level
+        self.max_health = self.base_health * level
+        self.health = self.max_health
         self.attack_power = self.base_attack * level
         self.defence = self.base_defence * level
         self.inventory = {}
         self.kind = kind
 
     def __str__(self) -> str:
-        return f'The {self.name} character is level {self.level} with health {self.health} and attack {self.attack_power}'
+        return (f'Name: {self.name}, Level: {self.level}, Health: {self.max_health}, '
+                f'Defence: {self.defence}, Attack: {self.attack_power}')
 
     def attack_target(self, target: 'Creature') -> None:
         target.got_damage(damage=self.attack_power)
@@ -27,40 +29,40 @@ class Creature:
     def increase_defence(self, *, defence_modifier=0) -> None:
         self.defence += defence_modifier
 
-    def increase_health(self, *, health_modifier=0) -> None:
-        self.health -= health_modifier
+    def increase_max_health(self, *, health_modifier=0) -> None:
+        self.max_health += health_modifier
 
-    def use_potion(self, *, potion_name: str) -> None:
+    def heal(self, *, heal_amount: int) -> None:
+        self.health += heal_amount
+
+    def use_potion(self, *, potion_name) -> None:
+        print(self.inventory[potion_name])
         if self.inventory[potion_name] > 0:
             self.inventory[potion_name] -= 1
-            if potion_name == 'Health Potion':
-                self.health += 30
-                print(
-                    f'{self.name} used Health Potion! The {self.name} health is {self.health}!\n'
-                    f'{self.name} has {self.inventory[potion_name]} Health Potions left!'
-                )
-            if potion_name == 'Stone Skin Potion':
-                self.defence *= 3
-                print(
-                    f'{self.name} used Stone Skin Potion! Defence is increased by 3 times!\n'
-                    f'{self.name} has {self.inventory[potion_name]} Stone Skin Potions left!'
-                )
+            if hasattr(potion_name, 'heal_amount'):
+                print(f'am:{potion_name.heal_amount}')
+                self.heal(heal_amount=potion_name.heal_amount or 0)
+            if hasattr(potion_name, 'defence_multiplier'):
+                self.increase_defence(defence_modifier=potion_name.defence_multiplier or 0)
 
 
 class Character(Creature):
     kind = 'Character'
 
     def add_to_inventory(self, *, item) -> None:
-        item_to_add = item.create_item_and_count()
-        self.inventory.update(item_to_add)
+        if item.name in self.inventory:
+            self.inventory[item.name]['count'] += item.count
+        else:
+            self.inventory[item.name] = {'data': item, 'count': item.count}
 
     def equip(self, *, item) -> None:
         if hasattr(item, 'health_modifier'):
-            self.increase_health(health_modifier=item.health_modifier or 0)
+            self.increase_max_health(health_modifier=item.health_modifier or 0)
         if hasattr(item, 'defence_modifier'):
             self.increase_defence(defence_modifier=item.defence_modifier or 0)
         if hasattr(item, 'damage_modifier'):
             self.increase_attack(damage_modifier=item.damage_modifier or 0)
+        print(self.inventory)
         self.inventory[item.name] -= 1
 
 
