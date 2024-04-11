@@ -36,14 +36,17 @@ class Creature:
         self.health += heal_amount
 
     def use_potion(self, *, potion_name) -> None:
-        print(self.inventory[potion_name])
-        if self.inventory[potion_name] > 0:
-            self.inventory[potion_name] -= 1
-            if hasattr(potion_name, 'heal_amount'):
-                print(f'am:{potion_name.heal_amount}')
-                self.heal(heal_amount=potion_name.heal_amount or 0)
-            if hasattr(potion_name, 'defence_multiplier'):
-                self.increase_defence(defence_modifier=potion_name.defence_multiplier or 0)
+        # print(self.inventory[potion_name])
+        if self.inventory[potion_name]['count'] > 0:
+            self.inventory[potion_name]['count'] -= 1
+            print(self.inventory[potion_name]['attributes'])
+            # print(potion_name.get_attributes)
+            attributes = self.inventory[potion_name]['attributes']
+            match potion_name:
+                case 'Health Potion':
+                    self.heal(heal_amount=attributes['heal_amount'])
+                case 'Stone Skin Potion':
+                    self.increase_defence(defence_modifier=attributes['defence_multiplier'])
 
 
 class Character(Creature):
@@ -53,7 +56,11 @@ class Character(Creature):
         if item.name in self.inventory:
             self.inventory[item.name]['count'] += item.count
         else:
-            self.inventory[item.name] = {'data': item, 'count': item.count}
+            self.inventory[item.name] = {
+                'data': item,
+                'count': item.count,
+                'attributes': item.attributes,
+            }
 
     def equip(self, *, item) -> None:
         if hasattr(item, 'health_modifier'):
@@ -62,8 +69,9 @@ class Character(Creature):
             self.increase_defence(defence_modifier=item.defence_modifier or 0)
         if hasattr(item, 'damage_modifier'):
             self.increase_attack(damage_modifier=item.damage_modifier or 0)
-        print(self.inventory)
-        self.inventory[item.name] -= 1
+        # print(self.inventory[item.name]['count'])
+
+        self.inventory[item.name]['count'] -= 1
 
 
 class Monster(Creature):
