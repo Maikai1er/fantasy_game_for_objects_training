@@ -1,6 +1,3 @@
-from relics import Relics
-
-
 class Creature:
     def __init__(self, *, name: str, level: int, kind: str) -> None:
         self.name = name
@@ -51,6 +48,8 @@ class Creature:
                     self.increase_defence(defence_modifier=attributes['defence_multiplier'])
                     print(f'The {self.name} has used Stone Skin Potion and has '
                           f'{self.inventory['Stone Skin Potion']['count']} left.')
+                case _:
+                    return
 
 
 class Character(Creature):

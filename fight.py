@@ -57,8 +57,3 @@ def prepare_to_fight():
     ork.equip(item=armour)
     elf.equip(item=armour)
     return elf, ork
-
-
-elf1, ork1 = prepare_to_fight()
-
-fight(character_1=ork1, character_2=elf1)
