@@ -32,11 +32,11 @@ class Creature:
     def heal(self, *, heal_amount: int) -> None:
         self.health += heal_amount
 
-    def use_potion(self, *, potion_name) -> None:
+    def use_potion(self, *, potion_name) -> bool:
         # print(self.inventory[potion_name])
-        # временное решение, ОБЯЗАТЕЛЬНОЗ переработать
+        # временное решение, ОБЯЗАТЕЛЬНО переработать
         if potion_name not in self.inventory:
-            return
+            return False
         if self.inventory[potion_name]['count'] > 0:
             self.inventory[potion_name]['count'] -= 1
             # print(self.inventory[potion_name]['attributes'])
@@ -47,12 +47,14 @@ class Creature:
                     self.heal(heal_amount=attributes['heal_amount'])
                     print(f'The {self.name} has used Health Potion and has '
                           f'{self.inventory['Health Potion']['count']} left.')
+                    return True
                 case 'Stone Skin Potion':
                     self.increase_defence(defence_modifier=attributes['defence_multiplier'])
                     print(f'The {self.name} has used Stone Skin Potion and has '
                           f'{self.inventory['Stone Skin Potion']['count']} left.')
+                    return True
                 case _:
-                    return
+                    return False
 
 
 class Character(Creature):
