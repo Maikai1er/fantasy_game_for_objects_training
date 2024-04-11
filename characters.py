@@ -34,6 +34,9 @@ class Creature:
 
     def use_potion(self, *, potion_name) -> None:
         # print(self.inventory[potion_name])
+        # временное решение, ОБЯЗАТЕЛЬНОЗ переработать
+        if potion_name not in self.inventory:
+            return
         if self.inventory[potion_name]['count'] > 0:
             self.inventory[potion_name]['count'] -= 1
             # print(self.inventory[potion_name]['attributes'])
