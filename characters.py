@@ -39,14 +39,18 @@ class Creature:
         # print(self.inventory[potion_name])
         if self.inventory[potion_name]['count'] > 0:
             self.inventory[potion_name]['count'] -= 1
-            print(self.inventory[potion_name]['attributes'])
+            # print(self.inventory[potion_name]['attributes'])
             # print(potion_name.get_attributes)
             attributes = self.inventory[potion_name]['attributes']
             match potion_name:
                 case 'Health Potion':
                     self.heal(heal_amount=attributes['heal_amount'])
+                    print(f'The {self.name} has used Health Potion and has '
+                          f'{self.inventory['Health Potion']['count']} left.')
                 case 'Stone Skin Potion':
                     self.increase_defence(defence_modifier=attributes['defence_multiplier'])
+                    print(f'The {self.name} has used Stone Skin Potion and has '
+                          f'{self.inventory['Stone Skin Potion']['count']} left.')
 
 
 class Character(Creature):

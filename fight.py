@@ -11,12 +11,12 @@ def fight(*, character_1: 'Creature', character_2: 'Creature') -> None:
         print(f'The {character_2.name} has {character_2.health} hp left')
         if character_1.health <= 40:
             character_1.use_potion(potion_name='Health Potion')
-            print(f'The {character_1.name} has used Health Potion and has '
-                  f'{character_1.inventory['Health Potion']['count']} left.')
+            # print(f'The {character_1.name} has used Health Potion and has '
+            #       f'{character_1.inventory['Health Potion']['count']} left.')
         if character_2.health <= 40:
             character_2.use_potion(potion_name='Health Potion')
-            print(f'The {character_2.name} has used Health Potion and has '
-                  f'{character_2.inventory['Health Potion']['count']} left.')
+            # print(f'The {character_2.name} has used Health Potion and has '
+            #       f'{character_2.inventory['Health Potion']['count']} left.')
         if character_1.health <= 40:
             character_1.use_potion(potion_name='Stone Skin Potion')
         if character_2.health <= 40:
