@@ -1,4 +1,4 @@
-from characters import Creature, Ork, Elf
+from characters import Creature, Ork, Elf, Werewolf
 from relics import HealthPotion, StoneSkinPotion, Diadem, Sword, Bow, Armour
 import time
 
@@ -9,18 +9,20 @@ def fight(*, character_1: 'Creature', character_2: 'Creature') -> None:
         character_2.attack_target(character_1)
         print(f'The {character_1.name} has {character_1.health} hp left')
         print(f'The {character_2.name} has {character_2.health} hp left')
-        if character_1.health <= 40:
-            character_1.use_potion(potion_name='Health Potion')
-            # print(f'The {character_1.name} has used Health Potion and has '
-            #       f'{character_1.inventory['Health Potion']['count']} left.')
-        if character_2.health <= 40:
-            character_2.use_potion(potion_name='Health Potion')
-            # print(f'The {character_2.name} has used Health Potion and has '
-            #       f'{character_2.inventory['Health Potion']['count']} left.')
-        if character_1.health <= 40:
-            character_1.use_potion(potion_name='Stone Skin Potion')
-        if character_2.health <= 40:
-            character_2.use_potion(potion_name='Stone Skin Potion')
+        if character_1.kind == 'Character':
+            if character_1.health <= 40:
+                character_1.use_potion(potion_name='Health Potion')
+                # print(f'The {character_1.name} has used Health Potion and has '
+                #       f'{character_1.inventory['Health Potion']['count']} left.')
+            if character_1.health <= 40:
+                character_1.use_potion(potion_name='Stone Skin Potion')
+        if character_2.kind == 'Character':
+            if character_2.health <= 40:
+                character_2.use_potion(potion_name='Health Potion')
+                # print(f'The {character_2.name} has used Health Potion and has '
+                #       f'{character_2.inventory['Health Potion']['count']} left.')
+            if character_2.health <= 40:
+                character_2.use_potion(potion_name='Stone Skin Potion')
         time.sleep(1)
     if character_1.health <= 0 and character_2.health <= 0:
         print(f'The {character_1.name} and the {character_2.name} both dead. RIP!')
@@ -34,6 +36,7 @@ def fight(*, character_1: 'Creature', character_2: 'Creature') -> None:
 def prepare_to_fight():
     ork = Ork(name='Orche', level=1, kind='Character')
     elf = Elf(name='Legolas', level=1, kind='Character')
+    werewolf = Werewolf(name='DaddyWolf', level=1, kind='Monster')
     potion = HealthPotion(name='Health Potion', count=2)
     potion_2 = StoneSkinPotion(name='Stone Skin Potion', count=1)
     diadem = Diadem(name='Diadem', count=1)
@@ -56,4 +59,4 @@ def prepare_to_fight():
     elf.equip(item=bow)
     ork.equip(item=armour)
     elf.equip(item=armour)
-    return elf, ork
+    return elf, ork, werewolf

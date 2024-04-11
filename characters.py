@@ -84,7 +84,7 @@ class Monster(Creature):
 class Werewolf(Monster):
     name = 'Werewolf'
     base_attack = 20
-    base_health = 100
+    base_health = 200
     base_defence = 10
 
 
