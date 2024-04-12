@@ -5,7 +5,7 @@ def fight(*, character_1, character_2) -> None:
     while character_1.health > 0 and character_2.health > 0:
         print(f'The {character_1.name} has {character_1.health} hp left')
         print(f'The {character_2.name} has {character_2.health} hp left')
-        print('Possible actions: attack, heal, stone')
+        print('Possible actions: attack, heal, stone, parry')
         action = input('Which action would you like to perform? ')
         match action:
             case 'attack':
@@ -18,6 +18,10 @@ def fight(*, character_1, character_2) -> None:
                 character_1.use_potion(potion_name='Stone Skin Potion')
                 # print(f'The {character_1.name} has used Stone Skin Potion and has '
                 # f'{character_1.inventory['Stone Skin Potion']['count']} left.')
+            case 'parry':
+                # the parrying character fully negotiates damage done and deals half his damage. Otherwise, wastes turn
+                character_1.attack_target(character_2, damage_multiplier=0.5)
+                continue
 
         if character_2.kind == 'Character':
             potion_used = False
@@ -42,6 +46,6 @@ def fight(*, character_1, character_2) -> None:
         print(f'The {character_1.name} and the {character_2.name} both dead. RIP!')
         return
     if character_1.health <= 0:
-        print(f'The {character_1.name} is dead, {character_2.name} wins!')
+        print(f'The {character_1.name} is dead, {character_2.name} wins with {character_2.health} hp left.!')
     if character_2.health <= 0:
-        print(f'The {character_2.name} is dead, {character_1.name} wins!')
+        print(f'The {character_2.name} is dead, {character_1.name} wins with {character_1.health} hp left.!')

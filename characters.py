@@ -16,12 +16,12 @@ class Creature:
         return (f'Name: {self.name}, Level: {self.level}, Health: {self.max_health}, '
                 f'Defence: {self.defence}, Attack: {self.attack_power}')
 
-    def attack_target(self, target: 'Creature') -> None:
+    def attack_target(self, target, damage_multiplier=1) -> None:
         if self.is_crit_hit():
             print(f'Critical hit by {self.name}!')
-            target.got_damage(damage=self.attack_power * self.crit_damage)
+            target.got_damage(damage=(self.attack_power * self.crit_damage) * damage_multiplier)
         else:
-            target.got_damage(damage=self.attack_power)
+            target.got_damage(damage=self.attack_power * damage_multiplier)
 
     def is_crit_hit(self) -> bool:
         if hasattr(self, 'crit_chance'):
