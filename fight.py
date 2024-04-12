@@ -1,9 +1,7 @@
-from characters import Creature, Ork, Elf, Werewolf
-from relics import HealthPotion, StoneSkinPotion, Diadem, Sword, Bow, Armour
 import time
 
 
-def fight(*, character_1: 'Creature', character_2: 'Creature') -> None:
+def fight(*, character_1, character_2) -> None:
     while character_1.health > 0 and character_2.health > 0:
         print(f'The {character_1.name} has {character_1.health} hp left')
         print(f'The {character_2.name} has {character_2.health} hp left')

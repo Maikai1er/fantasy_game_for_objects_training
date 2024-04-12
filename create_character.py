@@ -1,5 +1,3 @@
-import time
-
 from characters import Ork, Elf
 
 

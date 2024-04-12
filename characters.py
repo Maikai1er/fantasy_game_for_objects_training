@@ -1,3 +1,6 @@
+import random
+
+
 class Creature:
     def __init__(self, *, name: str, level: int, kind: str) -> None:
         self.name = name
@@ -14,7 +17,16 @@ class Creature:
                 f'Defence: {self.defence}, Attack: {self.attack_power}')
 
     def attack_target(self, target: 'Creature') -> None:
-        target.got_damage(damage=self.attack_power)
+        if self.is_crit_hit():
+            print(f'Critical hit by {self.name}!')
+            target.got_damage(damage=self.attack_power * self.crit_damage)
+        else:
+            target.got_damage(damage=self.attack_power)
+
+    def is_crit_hit(self) -> bool:
+        if hasattr(self, 'crit_chance'):
+            return random.random() <= self.crit_chance
+        return False
 
     def got_damage(self, *, damage: int) -> None:
         damage_received = damage * (1 - self.defence / 100)
@@ -97,9 +109,13 @@ class Elf(Character):
     base_attack = 15
     base_health = 60
     base_defence = 7
+    crit_chance = 0.2
+    crit_damage = 1.5
 
 
 class Ork(Character):
     base_attack = 10
     base_health = 100
     base_defence = 10
+    crit_chance = 0.15
+    crit_damage = 1.7
